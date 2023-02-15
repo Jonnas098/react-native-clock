@@ -1,7 +1,8 @@
 import {React, useState} from "react";
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Button } from "react-native";
+import { View, Button } from "react-native";
 import Clock from "./components/Clock";
+import Styles from "./theme/Styles";
 
 const App = () => {
     const [on, setOn] = useState(false);
@@ -10,7 +11,7 @@ const App = () => {
     };
 
     return(
-        <View style={styles.container}>
+        <View style={Styles.container}>
             {on && <Clock/>}
             <Button 
                 title = {`Turn clock ${on ? 'Off' : "On"}`}
@@ -20,13 +21,5 @@ const App = () => {
         </View>
     );
 }
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
 
 export default App;

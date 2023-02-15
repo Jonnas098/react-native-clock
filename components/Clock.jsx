@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
+import Styles from "../theme/Styles";
 
-export default function Clock(){
+const Clock= () => {
     let [time, setTime] = useState('00:00');
 
     useEffect(()=>{
@@ -16,9 +17,11 @@ export default function Clock(){
 
     return(
         <View>
-            <Text>
+            <Text style={Styles.clock}>
                 {time}
             </Text>
         </View>
     )
 }
+
+export default Clock;
