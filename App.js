@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import {React, useState} from "react";
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { View, StyleSheet, Button } from "react-native";
+import Clock from "./components/Clock";
 
-export default class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      on: false
+const App = () => {
+    const [on, setOn] = useState(false);
+    const toggleClock = () => {
+        setOn(!on);
     };
-  }
 
-  render(){
-    return (
-      <View style={this.styles.container}>
-          {this.state.on && <Clock/>}
-          <Button
-          title={`Turn clock ${this.state.on? 'Off' : 'On'}`}
-          onPress={()=>{this.setState({on: !this.state.on})}}
-          />
-        <StatusBar style="inverted" />
-      </View>
+    return(
+        <View style={styles.container}>
+            {on && <Clock/>}
+            <Button 
+                title = {`Turn clock ${on ? 'Off' : "On"}`}
+                onPress = {toggleClock}
+            />
+            <StatusBar style="inverted"/>
+        </View>
     );
-  }
-
-  styles = StyleSheet.create({
+}
+const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
@@ -32,48 +29,4 @@ export default class App extends Component {
     },
   });
 
-}
-
-class Clock extends Component{
-  tick = 0;
-
-  constructor(props){
-    console.log('Constructor called')
-    super(props);
-    this.state = {
-      time: '00:00',
-    };
-  }
-
-  render(){
-    console.log('render called');
-    return(
-      <View>
-          <Text>
-            {this.state.time}
-          </Text>
-      </View>
-    );
-  }
-
-  componentDidMount(){
-    console.log('componentDidMount called')
-    this.tick = setInterval(()=>{
-      this.setState({
-        time : new Date().toLocaleTimeString(),
-      });
-      console.info('tick')
-    }, 1000)
-  }
-
-  componentDidUpdate(){
-    console.log('componentDidUpdate called');
-  }
-
-  componentWillUnmount(){
-    clearInterval(this.tick)
-  }
-
-}
-
-
+export default App;
